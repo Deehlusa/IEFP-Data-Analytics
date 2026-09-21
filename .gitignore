@@ -1,0 +1,29 @@
+# Ambientes Virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Bytecode Python e Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Ficheiros de Sistema (macOS / Windows)
+.DS_Store
+Thumbs.db
+
+# Variáveis de Ambiente e Credenciais
+.env
+.env.local
+*.pem
+*.key
+*.PDF
+# IDEs
+.vscode/
+.idea/
