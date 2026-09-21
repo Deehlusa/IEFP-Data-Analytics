@@ -1,6 +1,6 @@
 # Data Analytics & Engineering Workspace — IEFP
 > **Programa:** Especialização em Análise de Dados (`FME94SI0001` · 300h)  
-> **Owner:** André Luiz Sales Rodrigues  
+> **Owner:** André Rodrigues  
 > **Runtime:** macOS Apple Silicon (ARM64) · Local-First Architecture
 
 ---
