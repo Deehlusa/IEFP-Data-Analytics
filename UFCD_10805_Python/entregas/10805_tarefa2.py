@@ -13,7 +13,7 @@ print(type(Vip))
 print("----------------------")
 # PRINT VALOR GUARDADO
 # USA MAIUSCULO
-print (Nome.upper())
+print (Nome.upper())    
 # SPLIT e INDEXAÇÃO DE STRING - PEGA O PRIMEIRO NOME
 print(Nome.split()[0])
 # METODO TITTLE REDUNDANTE PQ ESCREVI AS PRIMEIRAS LETRAS DO NOME EM MAISCULA
@@ -61,3 +61,9 @@ cliente["email"] = "andre@email.com"
 
 # IMPRIME ITENS DO DICIONÁRIO EM F STRING ADICIONEI /N PARA QUEBRA DE LINHA
 print(f"\nNome: {cliente['nome']} \nIdade: {cliente['idade']} \nVip: {cliente['vip']} \nCompras: {cliente['compras']} \nEmail: {cliente['email']}")
+
+
+if Idade >= 18:
+    print("Cliente pode comprar na nossa loja.")
+else:
+    print("Não pode.")

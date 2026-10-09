@@ -1,4 +1,4 @@
-# Ambientes Virtuais
+# Ambientes Virtuais & Gestores de Pacotes
 .venv/
 venv/
 env/
@@ -10,20 +10,63 @@ __pycache__/
 *$py.class
 .pytest_cache/
 .coverage
+.mypy_cache/
 
-# Jupyter Notebooks
+# Jupyter Notebooks & Checkpoints
 .ipynb_checkpoints/
 
-# Ficheiros de Sistema (macOS / Windows)
+# Ficheiros de Sistema (macOS / Windows / Linux)
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
+desktop.ini
 
-# Variáveis de Ambiente e Credenciais
-.env
-.env.local
-*.pem
-*.key
-*.PDF
-# IDEs
+# Ficheiros Temporários de Editores
+*.swp
+*.swo
+*~
+*.bak
+
+# IDEs & Editores
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+
+# Documentos PDF (Ignorar todos os PDFs para evitar ficheiros pesados no Git)
+*.pdf
+*.PDF
+
+# Ficheiros de Texto Plano (.txt)
+*.txt
+
+# Datasets e Planilhas Brutas / Dados Locais
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.numbers
+*.parquet
+*.feather
+data/
+**/data/
+
+# Credenciais, Segredos e Variáveis de Ambiente
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
+secrets.json
+credentials.json
+
+# Aplicações e Projetos Experimentais Locais
+sql-tutor/
