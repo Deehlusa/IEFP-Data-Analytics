@@ -25,7 +25,6 @@ def main():
     adicionar(despesas, "Café", 1.20)
     adicionar(despesas, "Almoço", 10.50)
     adicionar(despesas, "Livro", 15.00)
-
     while True:
         print("\n=== MENU INTERATIVO ===")
         print("1 - ADICIONAR")
