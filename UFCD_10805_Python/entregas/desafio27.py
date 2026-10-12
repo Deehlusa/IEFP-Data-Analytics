@@ -13,3 +13,4 @@ class Retangulo:
 
 print("Área:", Retangulo(5, 10).area())  # Área: 50
 print("Perímetro:", Retangulo(5, 10).perimetro()) 
+
