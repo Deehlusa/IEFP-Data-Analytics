@@ -1,87 +1,109 @@
-## CLASSES (baseado no slide 277)
-from dataclasses import dataclass
+## CLASSES - versão simples
+# Ideia central: uma CLASSE é um molde. Um OBJETO é uma coisa feita com esse molde.
+# Molde "Pessoa"  ->  objetos: a Ana, o Rui, a Marta...
 
 
-# 1. Classe base: o molde de uma pessoa
+# ---------------------------------------------------------------
+# PASSO 1: criar o molde (a classe)
+# ---------------------------------------------------------------
 class Pessoa:
-    def __init__(self, nome: str, idade: int):  # __init__ corre quando criamos o objeto
-        self.nome = nome  # self = o objeto que está a ser criado
-        self.idade = idade
-
-
-# 2. PessoaV2: repete o código de Pessoa e acrescenta "ativo"
-class PessoaV2:
-    def __init__(self, nome: str, idade: int, ativo: bool = False):
+    # __init__ é uma função especial.
+    # O Python executa-a SOZINHO sempre que crias uma pessoa nova.
+    # Serve para guardar os dados iniciais (nome, idade) dentro do objeto.
+    def __init__(self, nome, idade):
+        # "self" quer dizer "este objeto que estou a criar".
+        # self.nome = nome  -> guarda o nome DENTRO deste objeto.
         self.nome = nome
         self.idade = idade
-        self.ativo = ativo
+
+    # Uma função dentro de uma classe chama-se MÉTODO.
+    # O método pode usar os dados guardados no objeto através do self.
+    def apresentar(self):
+        print(f"Olá, o meu nome é {self.nome} e tenho {self.idade} anos.")
 
 
-# 3. PessoaV3: herda de Pessoa, por isso não repete nome e idade
-class PessoaV3(Pessoa):
-    def __init__(self, nome: str, idade: int, ativo: bool = False):
-        super().__init__(nome, idade)  # chama o __init__ da classe Pessoa
-        self.ativo = ativo
+# Criar objetos (chamar o molde com os dados):
+ana = Pessoa("Ana", 30)
+rui = Pessoa("Rui", 25)
+
+print(ana.nome)  # Ana  -> ler um dado do objeto: objeto.dado
+print(rui.idade)  # 25
+ana.apresentar()  # usar um método: objeto.metodo()
+# Cada objeto tem os SEUS dados: a Ana e o Rui não se misturam.
 
 
-# 4. Dataclass: o Python escreve o __init__ por nós
-@dataclass
-class PessoaDataClass:
-    pessoa: str
-    idade: int
-    ativo: bool = False
-
-
-# 5. Veiculo: atributo "privado" com property (ler) e setter (alterar)
+# ---------------------------------------------------------------
+# PASSO 2: __str__ (o que aparece quando fazes print do objeto)
+# ---------------------------------------------------------------
 class Veiculo:
-    def __init__(self, modelo: str, cor: str):
-        self.__modelo = modelo  # __ à frente = uso interno da classe
-        self.__cor = cor
+    def __init__(self, modelo, cor):
+        self.modelo = modelo
+        self.cor = cor
 
-    def __str__(self) -> str:  # o que o print() mostra
+    # Sem __str__, print(carro) mostra algo feio tipo <__main__.Veiculo object at 0x...>
+    # Com __str__, tu decides o texto. Tem de devolver (return) um texto.
+    def __str__(self):
         return f"{self.modelo} ({self.cor})"
 
-    @property
-    def modelo(self) -> str:  # só leitura, não tem setter
-        return self.__modelo
-
-    @property
-    def cor(self) -> str:
-        return self.__cor
-
-    @cor.setter
-    def cor(self, cor) -> None:  # permite veiculo.cor = "azul"
-        self.__cor = cor
-
-
-# 6. Computador: __slots__ limita os atributos permitidos
-SISTEMAS = {1: "Windows", 2: "Linux", 3: "macOS"}
-
-
-class Computador:
-    __slots__ = ("hostname", "sistema", "endereco")
-
-    def __init__(self, hostname: str, so: int, ip: str) -> None:
-        self.hostname = hostname
-        self.sistema = SISTEMAS[so]
-        self.endereco = ip or "127.0.0.1"  # se ip vier vazio, usa o valor por defeito
-
-    def __str__(self) -> str:
-        return f"{self.hostname} ({self.sistema}) - {self.endereco}"
-
-
-# --- Testes ---
-p2 = PessoaV2("Ana", 30)
-p3 = PessoaV3("Rui", 25, ativo=True)
-pd = PessoaDataClass("Marta", 41)
-print(p2.nome, p2.ativo)  # Ana False
-print(p3.nome, p3.idade, p3.ativo)  # Rui 25 True
-print(pd)  # a dataclass já tem um print bonito
 
 carro = Veiculo("Golf", "preto")
 print(carro)  # Golf (preto)
-carro.cor = "azul"  # usa o setter
+
+carro.cor = "azul"  # podes alterar um dado do objeto quando quiseres
 print(carro)  # Golf (azul)
 
-pc = Computador("srv-01", 2, "")
-print(pc)  # srv-01 (Linux) - 127.0.0.1
+
+# ---------------------------------------------------------------
+# PASSO 3: herança (reaproveitar um molde para não repetir código)
+# ---------------------------------------------------------------
+# Queremos uma pessoa igual à Pessoa, mas com mais um dado: "ativo".
+# Em vez de copiar o código todo, escrevemos Pessoa entre parênteses.
+# Assim PessoaV3 JÁ TEM nome, idade e o método apresentar().
+class PessoaV3(Pessoa):
+    def __init__(self, nome, idade, ativo=False):  # ativo=False -> valor por defeito
+        # super() = "a classe de onde herdo" (Pessoa).
+        # Esta linha chama o __init__ da Pessoa para guardar nome e idade.
+        super().__init__(nome, idade)
+        # E aqui guardamos só o que é novo:
+        self.ativo = ativo
+
+
+marta = PessoaV3("Marta", 41)  # ativo não indicado -> fica False
+joao = PessoaV3("João", 19, ativo=True)
+
+print(marta.nome, marta.ativo)  # Marta False
+print(joao.nome, joao.ativo)  # João True
+joao.apresentar()  # método herdado da Pessoa, não foi preciso escrevê-lo outra vez
+
+
+# ---------------------------------------------------------------
+# PASSO 4: dataclass (atalho para classes que só guardam dados)
+# ---------------------------------------------------------------
+from dataclasses import dataclass
+
+
+# @dataclass pede ao Python para escrever o __init__ e o __str__ por ti.
+# Só tens de listar os dados e o tipo de cada um.
+@dataclass
+class PessoaDataClass:
+    nome: str
+    idade: int
+    ativo: bool = False  # valor por defeito
+
+
+p = PessoaDataClass("Sofia", 33)
+print(p)  # PessoaDataClass(nome='Sofia', idade=33, ativo=False)
+print(p.nome)  # Sofia
+
+
+# ---------------------------------------------------------------
+# RESUMO
+# ---------------------------------------------------------------
+# class        -> molde
+# objeto       -> coisa criada com o molde: ana = Pessoa("Ana", 30)
+# __init__     -> corre ao criar o objeto e guarda os dados
+# self         -> "este objeto"
+# método       -> função dentro da classe (apresentar)
+# __str__      -> define o texto do print(objeto)
+# herança      -> class Filha(Mae): reaproveita o código da Mae
+# @dataclass   -> o Python escreve o __init__ por ti

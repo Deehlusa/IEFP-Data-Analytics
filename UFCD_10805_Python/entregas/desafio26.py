@@ -16,6 +16,7 @@ def jogo():
         else:
             acertou = True
             print(f"Parabéns! Você acertou o número {numero_aleatorio} em {tentativas} tentativas.")
+            break
 
 # rodar o jogo
 jogo()
