@@ -18,3 +18,10 @@ class Contador:
 
     def mostrar(self):
         print(f"Valor atual: {self.valor}")
+
+c = Contador()
+print(c.valor)  # Valor atual: 0
+c.incrementar()
+c.incrementar()
+c.mostrar()  # Valor atual: 2
+print(c.valor)  # Valor atual: 2
