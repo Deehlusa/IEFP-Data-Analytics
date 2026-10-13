@@ -1,5 +1,5 @@
 -- =======================================
---   CRIAÇÃO DA BASE DE DADOS LIBROMUNDO
+--   CRIAÇÃO DA BASE DE DADOS 
 -- =======================================
 
 -- Eliminar tabelas se já existirem (para permitir reexecução)
